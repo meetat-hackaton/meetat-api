@@ -1,0 +1,8 @@
+api:
+ image: node:4
+ working_dir: /usr/src
+ volumes:
+  - ./src:/usr/src
+ command: npm start
+ ports:
+  - "127.0.0.1:8080:8080"

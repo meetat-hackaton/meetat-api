@@ -1,2 +1,3 @@
 # Ignore
 .idea/
+src/node_modules/

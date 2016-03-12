@@ -1,0 +1,17 @@
+{
+	"name": "meetat-api",
+	"version": "0.0.1",
+	"license": "MIT",
+  "description": "",
+  "author": "MeetAt Team",
+	"engines": {
+		"node": ">=4 <5",
+		"npm": ">=1.3 <4"
+	},
+  "scripts": {
+    "start": "npm install && node server"
+  },
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
