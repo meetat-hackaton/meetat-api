@@ -12,8 +12,10 @@
     "start": "npm install && node server"
   },
   "dependencies": {
-    "ejs": "~0.8.5",
     "express": "^4.13.4",
-    "mongoose": "^4.4.7"
+    "mongoose": "^4.4.7",
+    "ejs": "^2.4.1",
+    "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.1"
   }
 }

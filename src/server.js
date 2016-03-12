@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var path = require('path');
 var express = require('express');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 
 mongoose.connect('mongodb://db/meetat', function(err) {
   if(err) {
@@ -13,6 +15,10 @@ mongoose.connect('mongodb://db/meetat', function(err) {
 var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 var users = require('./routes/users');
 app.use('/users', users);
