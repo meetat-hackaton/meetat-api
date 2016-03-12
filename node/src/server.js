@@ -39,8 +39,28 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.listen(8080, function () {
+var server = app.listen(8080, function () {
   console.log('Listening on port 8080!');
 });
+
+var gracefulShutdown = function() {
+  console.log("Received kill signal, shutting down gracefully.");
+  server.close(function() {
+    console.log("Closed out remaining connections.");
+    process.exit()
+  });
+
+  // if after
+  setTimeout(function() {
+    console.error("Could not close connections in time, forcefully shutting down");
+    process.exit()
+  }, 10*1000);
+}
+
+// listen for TERM signal .e.g. kill
+process.on ('SIGTERM', gracefulShutdown);
+
+// listen for INT signal e.g. Ctrl-C
+process.on ('SIGINT', gracefulShutdown);
 
 module.exports = app;
