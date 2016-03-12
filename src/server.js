@@ -1,24 +1,40 @@
 var mongoose = require('mongoose');
+var path = require('path');
+var express = require('express');
+
 mongoose.connect('mongodb://db/meetat', function(err) {
   if(err) {
-    console.log('connection error', err);
+    console.log('Connection error', err);
   } else {
-    console.log('connection successful');
+    console.log('Connection successful');
   }
 });
 
-var express = require('express');
 var app = express();
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 var users = require('./routes/users');
 app.use('/users', users);
 
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    error: err
+  });
 });
 
 app.listen(8080, function () {
-  console.log('Example app listening on port 8080!');
+  console.log('Listening on port 8080!');
 });
 
+module.exports = app;
