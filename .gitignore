@@ -1,4 +1,4 @@
 # Ignore
 .idea/
-src/node_modules/
+node/src/node_modules/
 db/
