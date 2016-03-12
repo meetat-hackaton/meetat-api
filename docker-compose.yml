@@ -2,6 +2,7 @@ api:
  image: node:4
  working_dir: /usr/src
  command: npm start
+ stop_signal: SIGINT
  links:
   - db
 
