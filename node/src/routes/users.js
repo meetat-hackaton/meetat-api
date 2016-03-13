@@ -68,9 +68,9 @@ function createResponse(success, code, msg) {
 }
 
 router.get('/', function(req, res, next) {
-  Entity.find(function (err, todos) {
+  Entity.find({nickname: req.query.nickname}, function (err, users) {
     if (err) return next(err);
-    res.json(todos);
+    res.json(users);
   });
 });
 
