@@ -37,7 +37,7 @@ router.post('/', function(req, res, next) {
           return next(err);
         }
       } else {
-        res.json(createResponse(true, null, post._id));
+        res.json(createResponse(true, null, post));
       }
     });
   }
@@ -52,7 +52,7 @@ router.post('/auth', function(req, res, next) {
 
   function process(user, res) {
     if (validate(user)) {
-      res.json(createResponse(true, null, user._id));
+      res.json(createResponse(true, null, user));
     } else {
       res.json(createResponse(false, null, null));
     }
