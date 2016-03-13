@@ -27,6 +27,23 @@ router.post('/:id', function(req, res, next) {
   });
 });
 
+router.get('/:id', function(req, res, next) {
+  Entity.findById(req.params.id, function(err, user){
+    if (err) return next(err);
+    if (user !== null) {
+      Entity.where('_id').in(user.friends).
+        sort('nickname').
+        select('-_id nickname').
+        exec(function(err, friends){
+          if (err) return next(err);
+          res.json(createResponse(true, null, friends));
+        });
+    } else {
+      res.json(createResponse(false, null, null));
+    }
+  });
+});
+
 function createResponse(success, code, msg) {
   return {success: success, code: code, msg: msg};
 }

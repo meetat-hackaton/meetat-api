@@ -67,4 +67,11 @@ function createResponse(success, code, msg) {
   return {success: success, code: code, msg: msg};
 }
 
+router.get('/', function(req, res, next) {
+  Entity.find(function (err, todos) {
+    if (err) return next(err);
+    res.json(todos);
+  });
+});
+
 module.exports = router;
