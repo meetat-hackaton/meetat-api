@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var ObjectId = require('mongoose').ObjectID;
 
 var UserSchema = new mongoose.Schema({
   nickname: {
@@ -16,6 +17,10 @@ var UserSchema = new mongoose.Schema({
   phone_number: {
     type: String,
     required: true
+  },
+  friends: {
+    type: [ObjectId],
+    default: []
   },
   created_at: { type: Date, default: Date.now }
 });

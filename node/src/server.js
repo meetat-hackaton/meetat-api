@@ -22,6 +22,8 @@ app.use(cookieParser());
 
 var users = require('./routes/users');
 app.use('/users', users);
+var friends = require('./routes/friends');
+app.use('/friends', friends);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
