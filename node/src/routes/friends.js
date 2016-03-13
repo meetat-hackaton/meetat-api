@@ -12,9 +12,14 @@ router.post('/:id', function(req, res, next) {
         if (err) return next(err);
         if (friend !== null) {
           user.friends.addToSet(mongoose.Types.ObjectId(friend.id));
-          Entity.findByIdAndUpdate(req.params.id, {friends: user.friends}, {multi: false}, function (err, numberAffected, raw) {
+          Entity.findByIdAndUpdate(user.id, {friends: user.friends}, {multi: false}, function (err) {
             if (err) return next(err);
-            res.json(createResponse(true, null, null));
+
+            friend.friends.addToSet(mongoose.Types.ObjectId(user.id));
+            Entity.findByIdAndUpdate(friend.id, {friends: friend.friends}, {multi: false}, function (err) {
+              if (err) return next(err);
+              res.json(createResponse(true, null, null));
+            });
           });
         } else {
           res.json(createResponse(false, 2, null));
